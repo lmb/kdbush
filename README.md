@@ -29,13 +29,13 @@ for (const {x, y} of items) {
 index.finish();
 
 // make a bounding box query
-const foundIds = index.range(minX, minY, maxX, maxY);
+const foundIds = index.range(minX, maxX, minY, maxY);
 
 // map ids to original items
 const foundItems = foundIds.map(i => items[i]);
 
 // make a radius query
-const neighborIds = index.within(x, y, 5);
+const neighborIds = index.within(5, x, y);
 
 // instantly transfer the index from a worker to the main thread
 postMessage(index.data, [index.data]);
@@ -98,5 +98,6 @@ Very useful for transferring or sharing indices between threads or storing them 
 - `data`: array buffer that holds the index.
 - `numItems`: number of stored items.
 - `nodeSize`: number of items in a KD-tree node.
+- `dimensions`: number of dimensions for each item (minimum 2).
 - `ArrayType`: array type used for internal coordinates storage.
 - `IndexArrayType`: array type used for internal item indices storage.

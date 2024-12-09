@@ -25,13 +25,13 @@ console.log(`memory: ${heapSize()}`);
 console.time('10000 small bbox queries');
 for (let i = 0; i < 10000; i++) {
     const p = randomPoint(1000);
-    index.range(p.x - 1, p.y - 1, p.x + 1, p.y + 1);
+    index.range(p.x - 1, p.x + 1, p.y - 1, p.y + 1);
 }
 console.timeEnd('10000 small bbox queries');
 
 console.time('10000 small radius queries');
 for (let i = 0; i < 10000; i++) {
     const p = randomPoint(1000);
-    index.within(p.x, p.y, 1);
+    index.within(1, p.x, p.y);
 }
 console.timeEnd('10000 small radius queries');
